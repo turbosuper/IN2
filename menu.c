@@ -45,20 +45,42 @@ int getMenu(char *titel, char **menuItem, int numberOfItems){
 			printf("%02d. %s\n", i+1, *(menuItem+i));
 				   };
 		  };
-
-	gotoXY(1,16); // An der Zeile 16 der Wahl zeigen
+	// An der Zeile 16 der Wahl zeigen
+	
+	gotoXY(1,16); 
 	printf("\nIhrer Wahl: ");
-	kbclr(); //Tasttur Puffer Entleeren
-	asciiVal = getch(); //Taste speichern
-	input = asciiVal - 48; //Taste ins Nummer aus der Wahlliste umwandeln
-	if (input > numberOfItems-1 || input < 0) { //Eine Meldung senden, wenn die Angabe stimmt nicht	
+	
+	 //Tasttur Puffer Entleeren
+	kbclr();	
+	
+	 //Taste speichern
+	asciiVal = getch();	
+	
+	 //Taste ins Nummer aus der Wahlliste umwandeln
+	input = asciiVal - 48;
+	
+	//Eine Meldung senden, wenn die Angabe stimmt nicht	
+	if (input > numberOfItems-1 || input < 0) { 
 		printf("Keine gueltige Angabe. Bitte versuchen sie es erneut.\n\n\n");
-		sleep(2); //Warten mit der Meldung
+		
+	       	//Warten mit der Meldung
+		sleep(2);
+	}
+	
+	//Abprufen ob Program nicht beendet sein soll
+	else if(input == 0 ){
+	       printf("\n");
+		_exit(0);	
 		}
 	else {
-	printf(" %d \n", input);
+		printf(" %d \n", input);
 		}
-	} while ( input > numberOfItems || input < 0 || input == 0);// So lange Menu wiederholen, bis eine Gultigie Angabe kommt vor
+
+	}
+	
+	// So lange Menu wiederholen, bis eine Gultigie Angabe kommt vor
+       	while ( input > numberOfItems-1	|| input < 0 || input == 0);
+	
 	return input;
 }
 
