@@ -15,6 +15,8 @@
 void dummyFunc();
 int addShip();
 void printShip(Ship*);
-void printPosition(Position*);
+void printPosition(Coordinates*);
+Ship* createShip();
+Coordinates* createPosition();
 
 #endif   /* ----- #ifndef ships_INC  ----- */

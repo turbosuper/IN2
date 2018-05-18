@@ -9,18 +9,19 @@
 
 #ifndef  DATASTRUCTRE_H
 #define  DATASTRUCTRE_H
-
+#define MAXNAME 26
+#define MAXNOTES 40
 typedef struct{
 	float x;
 	float y;
 	float z;
-}Position;
+}Coordinates;
 
 typedef struct{
-	char Name[26];
-	Position* Coordinates;
+	char Name[MAXNAME];
+	Coordinates* Position;
 	float Speed;
-	char Notes[40];
+	char Notes[MAXNOTES];
 	struct Ship* Next;
 }Ship;
 
