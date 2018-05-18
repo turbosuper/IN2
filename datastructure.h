@@ -14,11 +14,11 @@ typedef struct{
 	float x;
 	float y;
 	float z;
-}position;
+}Position;
 
 typedef struct{
 	char Name[26];
-//	position Cooridanates;
+	Position* Coordinates;
 	float Speed;
 	char Notes[40];
 	struct Ship* Next;
