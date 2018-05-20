@@ -1,7 +1,8 @@
 
 TODO
 
--Die Schiffe Als verketete Liste umbauen, die newShip Funtkion entsprechend umbauen
+-Weiter mit Punkt 6 arbeiten
+
 -bei Angabe fuer den richtigen Datentyp anfragen - zb wenn float erwatet ist, ob der Nutzer
 einen Float gegeben hat.
 

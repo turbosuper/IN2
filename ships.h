@@ -13,10 +13,11 @@
 
 
 void dummyFunc();
-int addShip();
+Ship* appendShip(Ship*);
 void printShip(Ship*);
 void printPosition(Coordinates*);
 Ship* createShip();
 Coordinates* createPosition();
+void showAll(Ship*);
 
 #endif   /* ----- #ifndef ships_INC  ----- */

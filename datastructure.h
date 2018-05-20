@@ -17,7 +17,7 @@ typedef struct{
 	float z;
 }Coordinates;
 
-typedef struct{
+typedef struct Ship{
 	char Name[MAXNAME];
 	Coordinates* Position;
 	float Speed;

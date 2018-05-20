@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include "ships.h"
 #include "lib.h"
@@ -16,16 +17,33 @@
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  addShip
+ *         Name:  appendShip
  *  Description:  Eine Neue Shiff addieren zu der letzter Platz in Verkette liste
  *  Arguments:	  Zeiger auf der Anfang der Verkette liste
- *  Return Value: Keine
+ *  Return Value: Zeiger auf der erster Element 
  * =====================================================================================
  */
-int addShip ()
+Ship* appendShip(Ship* shipone)
 {
-	return 0;
-}		/* -----  end of function addShip  ----- */
+	Ship* new;
+	
+	Ship* current;
+	Ship* prev;
+
+	new = createShip();
+	if (shipone == NULL){
+		shipone = new; //das wird nicht gespiechert!!! bei Verlassen der Funktion es geht verloren :(
+		}
+	else {
+		current = shipone;
+		while(current != NULL){
+			prev = current;
+			current = current->Next;
+			}
+		prev->Next = new;
+		}
+	return shipone;
+}		/* -----  end of function appendShip  ----- */
 
 
 /* 
@@ -115,6 +133,10 @@ Ship* createShip ()
 {
 	Ship* ship;
 	ship = (Ship*)malloc(sizeof(Ship));
+	if (ship == NULL){
+		printf("Keine Speicher Reservierung moeglich\n");
+		exit(-1);
+		}
 	printf("Bitte geben sie der Name des Shiffes ein: (langste moegliche name ist %d Zeichen gross)\n", MAXNAME);
 	scanf("%[^\n]s", ship->Name);
 	kbclr();
@@ -124,5 +146,28 @@ Ship* createShip ()
 	printf("Bitte geben sie die Notizen bezueglich der Shiff ein: (langste moegliche ist %d)\n", MAXNOTES);
 	scanf("%[^\n]s", ship->Notes);
 	ship->Position = createPosition();
+	ship->Next = NULL;
 	return ship;
 }		/* -----  end of function createShip  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  showAll
+ *  Description:  Ziegt Alle Shiffe aus der Verkette Liste
+ *  Arguments:	  Zeiger auf Anfang der Liste
+ *  Return value: Keine
+ * =====================================================================================
+ */
+void showAll (Ship* shipone)
+{
+	Ship* current = shipone;
+
+	if (current == NULL){
+		printf("Liste ist leer\n");
+	}
+
+	while(current != NULL){
+		printShip(current);
+		current = current->Next;
+	}
+}		/* -----  end of function showAll  ----- */
