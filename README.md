@@ -1,7 +1,8 @@
 
 TODO
 
--Shiff finden funktioniert nicht... weiss nicht warum!!! :(
+-pkt 7 funktioniert
+-pkt 6 der Aufgabe machen und dann weiter ab 8ten Punkt
 
 -bei Angabe fuer den richtigen Datentyp anfragen - zb wenn float erwatet ist, ob der Nutzer
 einen Float gegeben hat.
@@ -13,4 +14,4 @@ Man koennte in jede Funktion eine while schleife schreiben, der zeigt etwas so l
 eine  taste nicht gedruckt ist. Oder menu umschreiben so dass man mit einen Funktion 
 aufrufen kann, zb makeAchoice(); (diese Funktion wird man dann nach jeden Aktion benutzen koennen)
 
-weiter mit Punkt 2 arbeiten
+

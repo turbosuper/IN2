@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ships.h"
 #include "lib.h"
 #include "datastructure.h"
@@ -107,7 +108,7 @@ Ship* createShip ()
  * =====================================================================================
  */
 void printPosition(Coordinates* position){
-	printf("X: %f, Y %f, Z: %f \n", position->x, position->y, position->z) ;
+	printf("X: %4.3f, Y %4.3f, Z: %4.3f \n", position->x, position->y, position->z) ;
 }		/* -----  end of function showShip  ----- */
 
 /* 
@@ -121,7 +122,7 @@ void printPosition(Coordinates* position){
 void printShip (Ship* Ship){
 	if (Ship != NULL){
  		printf("==================\n");
- 		printf("Name: %sGeschwindigkeit %f \nNotizen: %s", Ship->Name, Ship->Speed, Ship->Notes) ;
+ 		printf("Name: %sGeschwindigkeit %4.3f \nNotizen: %s", Ship->Name, Ship->Speed, Ship->Notes) ;
 		printf("Lage des Shiffes:");
 		printPosition(Ship->Position);
 		printf("\n");
@@ -170,7 +171,7 @@ Ship* appendShip(Ship* shipone)
 
 	new = createShip();
 	if (shipone == NULL){
-		shipone = new; //das wird nicht gespiechert!!! bei Verlassen der Funktion es geht verloren :(
+		shipone = new; 
 		}
 	else {
 		current = shipone;
@@ -195,11 +196,11 @@ Ship* appendShip(Ship* shipone)
 Ship* getShip (Ship* shipone, char keyword[MAXNAME])
 {
 	Ship* ship = shipone;
-	Ship* ret = shipone;
+	Ship* ret = NULL;
 
 	if (ship != NULL){
 		while (ship != NULL && ret == NULL){
-			if (ship->Name == keyword){
+			if (strcmp(ship->Name,keyword)== 0){
 				ret = ship;
 				}
 			ship = ship->Next;
@@ -230,8 +231,12 @@ void findShip (Ship* shipone)
 	fgets(keyword, MAXNAME, stdin); 
 	printf("Sie wollten dieser Shiff finden: %s \n", keyword);
 
-	printShip(getShip(shipone, keyword));
-
+	if (getShip(shipone, keyword)== NULL){
+		printf("Shiff mit der Name %s ist nicht gefunden geworden \n", keyword);
+		}
+	else{
+		printShip(getShip(shipone, keyword));
+		}
 }	
 /* -----  end of function findShip  ----- */
 
