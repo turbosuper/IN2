@@ -232,7 +232,7 @@ void findShip (Ship* shipone)
 	printf("Sie wollten dieser Shiff finden: %s \n", keyword);
 
 	if (getShip(shipone, keyword)== NULL){
-		printf("Shiff mit der Name %s ist nicht gefunden geworden \n", keyword);
+		printf("Shiff mit der Name:  \n %sist nicht gefunden geworden \n", keyword);
 		}
 	else{
 		printShip(getShip(shipone, keyword));
@@ -240,41 +240,94 @@ void findShip (Ship* shipone)
 }	
 /* -----  end of function findShip  ----- */
 
-/* ALTE VERSION FUNKTIONMIERT NICHT GUT
+/* 
  * ===  FUNCTION  ======================================================================
- *         Name:  findShip
- *  Description:  Findet einen Shiff, mit die gegebene Name in eine Verkette Liste
+ *         Name:  printName
+ *  Description:  Funkion der gibt Name der Gegebene struct
+ *  Arguments:    Zeiger auf dem Strukt mit Shiff
+ *  Return value: Keine
+ * =====================================================================================
+ */
+void printName (Ship* ship){
+	if (ship == NULL){
+		printf("Fehler, keine Shiff gegeben\n");
+	}else{
+		printf("%s\n", ship->Name);
+	}
+}		/* -----  end of function printName  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  deletShip
+ *  Description:  Findet einen Shiff, dann loescht es (wenn es gefunden ist)
  *  Arguments: 	  Zeiger auf anfang der Verkette Liste
- *  Return Value: Zeiger auf den Strukt mit den Shiff
+ *  Return Value: Zeiger auf Anfang der Verkette Liste
  * =====================================================================================
  *
-Ship* findShip(Ship* shipone)
-{	
-	Ship* ship = shipone;
-	Ship* ret = shipone;
-	char lookingfor[MAXNAME];
+ *
+ */
+Ship* deleteShip(Ship* shipone){
+	Ship* current = shipone;
+	Ship* temp;
+	Ship* p = NULL;
+	char keyword[MAXNAME];
 
-	if (ship != NULL){
-		printf("Bitte geben sie den gesuchte name in: \n");
-		fgets(lookingfor, MAXNAME, stdin); 
-		printf("Sie wollten dieser Shiff finden: %s \n", lookingfor);
-		while (ship != NULL && ret == NULL){
-			if (ship->Name == lookingfor){
-				ret = ship;
+	printf("Bitte geben sie Name der Shiff, der geloescht sein soll: \n");
+	fgets(keyword, MAXNAME, stdin); 
+	printf("Sie wollten dieser Shiff loeschen: %s \n", keyword);
+
+	if (getShip(shipone, keyword)== NULL){
+		printf("Shiff mit der Name:  \n%sist nicht gefunden geworden, da kann er auch nicht geloescht sein! \n", keyword);
+		sleep(4);
+		return shipone;
+		}
+	else{  
+		while( current != NULL) {
+			if(strcmp(current->Name,keyword) == 0){
+				if (current == shipone ){ //zu loeschen ist die 1. Komponente
+	        			temp = shipone;
+					shipone = shipone->Next;
+		        	}else{ //zu loeshjcen ist NICHT der erste Element
+					temp = current;
+					p->Next = current->Next;
+			        	}
+			free(temp);
+			current = NULL; //Aufhoeren zu suchen
+                	}else{
+				p = current;
+		                current = current->Next;}
+		 }
+	 return shipone;
+	}
+}	/* -----  end of function findShip  ----- */
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  compareSpeed
+ *  Description:  Fragt nach der eingabe, und listet Namen aller Shiffe die shneller/gleich sind
+ *  Arguments:    Zeiger auf der Anfang der Liste
+ *  Retrun Wert:  keine
+ * =====================================================================================
+ */
+void compareSpeed (Ship* shipone){
+	float speed;
+	Ship* current = shipone;
+	int i = 1;
+
+	if( shipone == NULL ){
+		printf("Liste ist leer\n");
+	}else{
+		printf("Bitte geben sie eine Geschwindigkeit, mit denem Shiffe vergleichen sein sollten: \n");
+		scanf("%f", &speed);
+		printf("Diese Shiffe sind schneller als %.4f : \n", speed);
+		while(current != NULL){
+			if (current->Speed >= speed){
+				printf("%2d: ", i++);
+				printName(current);
 				}
-			ship = ship->Next;
+			current = current->Next;
 			}
-		printShip(ret);
-		return ret;
-/  		else{
-			printf("Tut mir leid,Schiff mti der gesuchte Name existiert nicht! \n");
-			}
-		return ship;
-/
 		}
-
-	else{
-		printf("List ist leer \n");
-		return NULL;
-		}
-}	/ -----  end of function findShip  ----- */
+	
+}		/* -----  end of function compareSpeed  ----- */

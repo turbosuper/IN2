@@ -22,5 +22,8 @@ void showAll(Ship*);
 //Ship* findShip(Ship*);
 void findShip(Ship*);
 Ship* getShip (Ship* shipone, char keyword[MAXNAME]);
+Ship* deleteShip(Ship*);
+void compareSpeed (Ship* shipone);
+void printName (Ship* ship);
 	
 #endif   /* ----- #ifndef ships_INC  ----- */

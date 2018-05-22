@@ -23,10 +23,12 @@ int main(){
 	char *menuTitel = "Verwaltung der Schiffe";
 	char *menuItems[] = {
 		"Neues Shiff hinzufuegen",
-		"NICHT FERTIG Vorhandenes Shiff loeschen",
+		"Vorhandenes Shiff loeschen",
 		"Alle Shiffe auflisten",
 		"NICHT FERTIG Sortieren",
 		"Shiff suchen",
+		"Geschwindigkeit",
+		"NICHT FERTIG",
 		"Beenden"};
 
 //	Coordinates* position1; //test Koordinaten initialisiern
@@ -52,13 +54,15 @@ int main(){
 
 
 	gotoXY(1,21);
- 	while ((input = getMenu(menuTitel, menuItems, 6)) != 0){ ;
+ 	while ((input = getMenu(menuTitel, menuItems, 8)) != 0){ ;
 		switch(input){
 			case 1: shipone = appendShip(shipone); break; //dummyFunc(); sleep(2); //shiptwo = createShip();  break;
-			case 2: dummyFunc(); sleep(2); break;
+			case 2: shipone = deleteShip(shipone); break;
 			case 3: showAll(shipone); sleep(3); break;
 			case 4: dummyFunc(); sleep(2); break; //shipone = appendShip(shipone);  break;
 			case 5: findShip(shipone); sleep(2); break; //showAll(shipone); sleep(3); break;
+			case 6: compareSpeed(shipone); sleep(3); break;
+			case 7: dummyFunc(); sleep(2); break;
 			}
 	}
 

@@ -1,8 +1,7 @@
 
 TODO
 
--pkt 7 funktioniert
--pkt 6 der Aufgabe machen und dann weiter ab 8ten Punkt
+-pkt 8 (Sortieren) und 10 (Luftlinie) noch zu machen
 
 -bei Angabe fuer den richtigen Datentyp anfragen - zb wenn float erwatet ist, ob der Nutzer
 einen Float gegeben hat.

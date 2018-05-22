@@ -86,4 +86,3 @@ int getMenu(char *titel, char **menuItem, int numberOfItems){
 	
 	return input;
 }
-
