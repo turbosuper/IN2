@@ -1,7 +1,7 @@
 
 TODO
 
--Weiter mit Punkt 6 arbeiten
+-Shiff finden funktioniert nicht... weiss nicht warum!!! :(
 
 -bei Angabe fuer den richtigen Datentyp anfragen - zb wenn float erwatet ist, ob der Nutzer
 einen Float gegeben hat.

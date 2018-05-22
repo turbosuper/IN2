@@ -22,9 +22,9 @@ int main(){
 	int input;
 	char *menuTitel = "Verwaltung der Schiffe";
 	char *menuItems[] = {
-		"Neues Shif anlegen",
-		"Die gespeichrte Shiff Zeigen",
-		"[NICHT FERTIG]Alle Schiffe auflisten",
+		"NICHT FERTIGNeues Shif anlegen",
+		"NICHT FERTIGDie gespeichrte Shiff Zeigen",
+		"Shiff finden",
 		"Neue Shciff in Verkette Liste anlegen",
 		"Ganze Liste Zeigen",
 		"Beenden"};
@@ -45,7 +45,7 @@ int main(){
 
 	Ship* shipone = NULL; //test Shiff initialisieren 
 
-	Ship* shiptwo;
+	Ship* shiptwo = NULL;
 //	shipone = (Ship*)malloc(sizeof(Ship));
 //	shipone->Next = NULL;
 //	shiptwo = (Ship*)malloc(sizeof(Ship));
@@ -54,9 +54,9 @@ int main(){
 	gotoXY(1,21);
  	while ((input = getMenu(menuTitel, menuItems, 6)) != 0){ ;
 		switch(input){
-			case 1: shiptwo = createShip();  break;
+			case 1: dummyFunc(); sleep(2); //shiptwo = createShip();  break;
 			case 2: printShip(shiptwo); sleep(2); break;
-			case 3: dummyFunc(); break;
+			case 3: findShip(shipone); sleep(2); break;
 			case 4: shipone = appendShip(shipone);  break;
 			case 5: showAll(shipone); sleep(3); break;
 			}
