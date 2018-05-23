@@ -28,7 +28,7 @@ int main(){
 		"NICHT FERTIG Sortieren",
 		"Shiff suchen",
 		"Geschwindigkeit",
-		"LuftlinieNICHT FERTIG",
+		"Luftlinie",
 		"Beenden"};
 
 //	Coordinates* position1; //test Koordinaten initialisiern

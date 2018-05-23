@@ -364,7 +364,7 @@ float calculateDistance(Coordinates* position1, Coordinates* position2){
 	Y2 = position2->y;
 	Z2 = position2->z;
 
-	result = sqrt((float)(pow((X1-X2),2))-(float)(pow((Y1-Y2),2))-(float)(pow((Z1-Z2),2)));
+	result = sqrt((float)(pow((X1-X2),2))+(float)(pow((Y1-Y2),2))+(float)(pow((Z1-Z2),2)));
 	return result;
 }		/* -----  end of function showDistance  ----- */
 
@@ -389,30 +389,30 @@ void showDistance (Ship* shipone){
 		while(firstPosition == NULL){
 			printf("Bitte geben sie den gesuchte Shiff 1: \n");
 			fgets(keyword, MAXNAME, stdin); 
-			printf("Sie wollten nach dieser Shiff: %s \n", keyword);
+		//	printf("Sie wollten nach dieser Shiff: %s \n", keyword);
 
 			if (getShip(shipone, keyword)== NULL){
 				printf("Shiff mit der Name:  \n %sist nicht gefunden geworden! \n", keyword);
 				printf("Versuchen sie es bitte erneut.\n\n");
 			}else{
 				firstPosition = getPosition(getShip(shipone, keyword));
-				printPosition(firstPosition);
+				//printPosition(firstPosition);
 				}
 			}
 		
 		while(secondPosition == NULL){
 			printf("Bitte geben sie den gesuchte Shiff 2: \n");
 			fgets(keyword2, MAXNAME, stdin); 
-			printf("Sie wollten nach dieser Shiff: %s \n", keyword2);
+		//	printf("Sie wollten nach dieser Shiff: %s \n", keyword2);
 
 			if (getShip(shipone, keyword2)== NULL){
 				printf("Shiff mit der Name:  \n %sist nicht gefunden geworden! \n", keyword2);
 				printf("Versuchen sie es bitte erneut.\n\n");
 			}else{
 				secondPosition = getPosition(getShip(shipone, keyword2));
-				printPosition(secondPosition);
+				//printPosition(secondPosition);
 			}
-		printf("Der Distanz zwischen zwie gegebene Shiffe ist: %.3f \n", calculateDistance(firstPosition, secondPosition));
+		printf("\nDer Distanz zwischen zwie gegebene Shiffe ist: %.3f \n", calculateDistance(firstPosition, secondPosition));
 
 		}
 //		firsthip = 
