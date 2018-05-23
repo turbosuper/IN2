@@ -28,7 +28,7 @@ int main(){
 		"NICHT FERTIG Sortieren",
 		"Shiff suchen",
 		"Geschwindigkeit",
-		"NICHT FERTIG",
+		"LuftlinieNICHT FERTIG",
 		"Beenden"};
 
 //	Coordinates* position1; //test Koordinaten initialisiern
@@ -62,7 +62,7 @@ int main(){
 			case 4: dummyFunc(); sleep(2); break; //shipone = appendShip(shipone);  break;
 			case 5: findShip(shipone); sleep(2); break; //showAll(shipone); sleep(3); break;
 			case 6: compareSpeed(shipone); sleep(3); break;
-			case 7: dummyFunc(); sleep(2); break;
+			case 7: showDistance(shipone); sleep(2); break;
 			}
 	}
 

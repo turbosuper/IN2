@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "ships.h"
 #include "lib.h"
 #include "datastructure.h"
@@ -103,7 +104,7 @@ Ship* createShip ()
  * ===  FUNCTION  ======================================================================
  *         Name:  showShip
  *  Description:  Alle Daten zu einen Shiff zeigen
- *  Arguments:	  Zeiger auf der Struktur der beinhaltet einen Shiff
+ *  Arguments:	  Zeiger auf der Struktur der Lage eines Shiffes
  *  Return value: Keine
  * =====================================================================================
  */
@@ -274,7 +275,7 @@ Ship* deleteShip(Ship* shipone){
 
 	printf("Bitte geben sie Name der Shiff, der geloescht sein soll: \n");
 	fgets(keyword, MAXNAME, stdin); 
-	printf("Sie wollten dieser Shiff loeschen: %s \n", keyword);
+//	printf("Sie wollten dieser Shiff loeschen: %s \n", keyword);
 
 	if (getShip(shipone, keyword)== NULL){
 		printf("Shiff mit der Name:  \n%sist nicht gefunden geworden, da kann er auch nicht geloescht sein! \n", keyword);
@@ -292,6 +293,8 @@ Ship* deleteShip(Ship* shipone){
 					p->Next = current->Next;
 			        	}
 			free(temp);
+			printf("Erfolg!\n");
+			sleep(1);
 			current = NULL; //Aufhoeren zu suchen
                 	}else{
 				p = current;
@@ -331,3 +334,88 @@ void compareSpeed (Ship* shipone){
 		}
 	
 }		/* -----  end of function compareSpeed  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  getPosition
+ *  Description:  Liefert Zurueck Strukt mit Koordinaeten des Shciffes
+ *  Arguments:    Zeiger auf der Struct der Shiff
+ *  Return Value  Zeiger auf die Koordinaten
+ * =====================================================================================
+ */
+Coordinates* getPosition(Ship* ship){
+	return ship->Position;
+}		/* -----  end of function getPosition  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  calculateDistance
+ *  Description:  Rechnet der Distanz zwischen zwei Punkten
+ *  Arguments: 	  Zeigern auf zwei Kooridanten strukturen
+ *  Return Value: Distanz als float
+ * =====================================================================================
+ */
+float calculateDistance(Coordinates* position1, Coordinates* position2){
+	float X1, Y1, Z1, X2, Y2, Z2, result;
+	X1 = position1->x; 
+	Y1 = position1->y; 
+	Z1 = position1->z; 
+	X2 = position2->x;
+	Y2 = position2->y;
+	Z2 = position2->z;
+
+	result = sqrt((float)(pow((X1-X2),2))-(float)(pow((Y1-Y2),2))-(float)(pow((Z1-Z2),2)));
+	return result;
+}		/* -----  end of function showDistance  ----- */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  showDistance
+ *  Description:  Erfragt Nutzer nach Namen der Schiffe, dann sucht die Schiffe aus und
+ *  		  letztendlich zeigt der Distanz zwischen zwei Schiffe
+ *  Arguments:    Anfang der Verkette Liste
+ *  Return Value: keine
+ * =====================================================================================
+ */
+void showDistance (Ship* shipone){
+	Coordinates* firstPosition = NULL;
+	Coordinates* secondPosition = NULL;
+	char keyword[MAXNAME];
+	char keyword2[MAXNAME];
+
+	if (shipone == NULL){
+		printf("Liste ist leer\n");
+	}else{
+		while(firstPosition == NULL){
+			printf("Bitte geben sie den gesuchte Shiff 1: \n");
+			fgets(keyword, MAXNAME, stdin); 
+			printf("Sie wollten nach dieser Shiff: %s \n", keyword);
+
+			if (getShip(shipone, keyword)== NULL){
+				printf("Shiff mit der Name:  \n %sist nicht gefunden geworden! \n", keyword);
+				printf("Versuchen sie es bitte erneut.\n\n");
+			}else{
+				firstPosition = getPosition(getShip(shipone, keyword));
+				printPosition(firstPosition);
+				}
+			}
+		
+		while(secondPosition == NULL){
+			printf("Bitte geben sie den gesuchte Shiff 2: \n");
+			fgets(keyword2, MAXNAME, stdin); 
+			printf("Sie wollten nach dieser Shiff: %s \n", keyword2);
+
+			if (getShip(shipone, keyword2)== NULL){
+				printf("Shiff mit der Name:  \n %sist nicht gefunden geworden! \n", keyword2);
+				printf("Versuchen sie es bitte erneut.\n\n");
+			}else{
+				secondPosition = getPosition(getShip(shipone, keyword2));
+				printPosition(secondPosition);
+			}
+		printf("Der Distanz zwischen zwie gegebene Shiffe ist: %.3f \n", calculateDistance(firstPosition, secondPosition));
+
+		}
+//		firsthip = 
+//		printPosition(getPosition(shipone));
+	}
+}		/* -----  end of function showDistance  ----- */

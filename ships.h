@@ -25,5 +25,8 @@ Ship* getShip (Ship* shipone, char keyword[MAXNAME]);
 Ship* deleteShip(Ship*);
 void compareSpeed (Ship* shipone);
 void printName (Ship* ship);
+void showDistance (Ship* shipone );
+Coordinates* getPosition(Ship* ship);
+float calculateDistance(Coordinates* position1, Coordinates* position2);
 	
 #endif   /* ----- #ifndef ships_INC  ----- */

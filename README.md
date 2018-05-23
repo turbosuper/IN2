@@ -1,7 +1,8 @@
 
 TODO
 
--pkt 8 (Sortieren) und 10 (Luftlinie) noch zu machen
+-pkt 8 (Sortieren) 
+-pkt 10 (Luftlinie) die Berechnung stimmt nicht. Zu pruefen warum...
 
 -bei Angabe fuer den richtigen Datentyp anfragen - zb wenn float erwatet ist, ob der Nutzer
 einen Float gegeben hat.
