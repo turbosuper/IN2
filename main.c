@@ -59,7 +59,7 @@ int main(){
 			case 1: shipone = appendShip(shipone); break; //dummyFunc(); sleep(2); //shiptwo = createShip();  break;
 			case 2: shipone = deleteShip(shipone); break;
 			case 3: showAll(shipone); sleep(3); break;
-			case 4: dummyFunc(); sleep(2); break; //shipone = appendShip(shipone);  break;
+			case 4: shipone = sortShips(shipone); sleep(2); break; //shipone = appendShip(shipone);  break;
 			case 5: findShip(shipone); sleep(2); break; //showAll(shipone); sleep(3); break;
 			case 6: compareSpeed(shipone); sleep(3); break;
 			case 7: showDistance(shipone); sleep(2); break;

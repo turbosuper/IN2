@@ -411,11 +411,79 @@ void showDistance (Ship* shipone){
 			}else{
 				secondPosition = getPosition(getShip(shipone, keyword2));
 				//printPosition(secondPosition);
+				}
 			}
 		printf("\nDer Distanz zwischen zwie gegebene Shiffe ist: %.3f \n", calculateDistance(firstPosition, secondPosition));
 
 		}
-//		firsthip = 
-//		printPosition(getPosition(shipone));
-	}
 }		/* -----  end of function showDistance  ----- */
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  sortShips
+ *  Description:  Funktion der sortiert Shiffe nach der Name.
+ *  Arguments: 	  Zeiger auf Anfang der Verkette Liste
+ *  Return value: Zeiger auf Anfagn der Verkette Liste
+ *
+ * =====================================================================================
+ */
+Ship* sortShips(Ship* shipone){
+//	Ship* current = shipone;
+//	Ship* nextone = NULL;
+	Ship* top;
+	Ship *q;
+	Ship *p;
+	int changed = 1;
+
+// 	Ship* temp;
+	if ( (top = (Ship*)malloc(sizeof(Ship))) == NULL){
+		printf("Speicher Zugriff Fehler!\n");
+		exit(1);
+		}
+
+	top->Next = shipone;
+
+	if(shipone != NULL && shipone->Next != NULL){
+		//printf("Nichts zu sortieren.\n");
+		
+		while(changed){
+			changed = 0;
+			q = top;
+			p = top->Next;
+			while ( p->Next != NULL){
+				if(strcmp(p->Name, p->Next->Name) > 0){
+					q->Next = swapShips(p, p->Next);
+					changed = 1;
+				}
+			q = p;
+			if (p->Next != NULL)
+				p = p->Next;
+			}
+		}
+	}
+	p = top->Next;
+	free(top);
+	return p;
+}
+		/* -----  end of function sortShips  ----- */
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  swapShips
+ *  Description:  Funktion der tauscht zwei Shiffe mit einander
+ *  Arguments:	  Zieger auf zwei Schiffe
+ *  Return value: Zeiger auf der erster Shiff (nach der Tausch)
+ * =====================================================================================
+ */
+Ship* swapShips(Ship* ship1, Ship* ship2){
+/* 	Ship* temp;
+	if ( (temp = (Ship*)malloc(sizeof(Ship))) == NULL){
+		printf("Speicher Zugriff Fehler!\n");
+		exit(1);
+		}
+*/	ship1->Next = ship2->Next;
+	ship2->Next = ship1;
+	return ship2;
+}		/* -----  end of function swapShips  ----- */
