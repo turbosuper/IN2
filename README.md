@@ -1,9 +1,8 @@
 
 TODO
 
--Testen! ob alles funktioniert.
 -bei Sortieren fehler Meldungend schreiben
--bei malloc also Fehler Meldungen
+
 
 Nicht dringend, aber notig:
 -bei Angabe fuer den richtigen Datentyp anfragen - zb wenn float erwatet ist, ob der Nutzer

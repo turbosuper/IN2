@@ -71,11 +71,6 @@ int getMenu(char *titel, char **menuItem, int numberOfItems){
 		sleep(2);
 	       }
 	
-	   //Abprufen ob Program nicht beendet sein soll
-	  // else if(input == 0 ){
-	    //   printf("\n");
-	//	_exit(0);	
-	//	}
 	   else {
 		printf(" %d \n", input);
 		}

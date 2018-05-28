@@ -29,20 +29,6 @@ void dummyFunc(){
 }		/* -----  end of function dummFunc  ----- */
 
 
-/* NOCH NICHT FERTIG 
- * ===  FUNCTION  ======================================================================
- *         Name:  getCoorditanes
- *  Description:  Liferet drei Koordinaten der Shiff zurueck
- *  Arguments:	  Zeiger auf der Struktur des Shiffes, deren Kooridanten angezeigt sein
- *  		  sollen
- *  Return value: Zeiger auf der Struktur Coordinates
- * =====================================================================================
- *
-void showShip (Ship* Ship){
-	printf("Name: %s, Geschwindigkeit %f, Notizen: %s \n", Ship->Name, Ship->Speed, Ship->Notes) ;
-}		* -----  end of function showShip  ----- *
-*/
-
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -56,7 +42,10 @@ void showShip (Ship* Ship){
 Coordinates* createPosition()
 {
 	Coordinates* coordinates;
-	coordinates = (Coordinates*)malloc(sizeof(Coordinates));
+	if ((coordinates = (Coordinates*)malloc(sizeof(Coordinates))) == NULL){
+		printf("Speicher Zugriff Fehler!\n");
+		exit(1);
+		}
 
 	printf("Bitte geben sie der Position X des Shiffes ein: \n");
 	scanf("%f", &coordinates->x);
@@ -81,19 +70,22 @@ Ship* createShip ()
 {
 	Ship* ship;
 	ship = (Ship*)malloc(sizeof(Ship));
+	if ((ship = (Ship*)malloc(sizeof(Ship))) == NULL){
+		printf("Speicher Zugriff Fehler!\n");
+		exit(1);
+		}
+
 	if (ship == NULL){
 		printf("Keine Speicher Reservierung moeglich\n");
 		exit(-1);
 		}
 	printf("Bitte geben sie der Name des Shiffes ein: (langste moegliche name ist %d Zeichen gross)\n", MAXNAME);
-//	scanf("%[^\n]s", ship->Name);
 	fgets(ship->Name, MAXNAME, stdin);
 	kbclr();
 	printf("Bitte geben sie die Geschwindigketi des Schiffes: \n");
 	scanf("%f", &ship->Speed);
 	kbclr();
 	printf("Bitte geben sie die Notizen bezueglich der Shiff ein: (langste moegliche ist %d)\n", MAXNOTES);
-//	scanf("%[^\n]s", ship->Notes);
 	fgets(ship->Notes, MAXNOTES, stdin);
 	ship->Position = createPosition();
 	ship->Next = NULL;
@@ -230,12 +222,12 @@ void findShip (Ship* shipone)
 
 	printf("Bitte geben sie den gesuchte name in: \n");
 	fgets(keyword, MAXNAME, stdin); 
-	printf("Sie wollten dieser Shiff finden: %s \n", keyword);
 
 	if (getShip(shipone, keyword)== NULL){
 		printf("Shiff mit der Name:  \n %sist nicht gefunden geworden \n", keyword);
 		}
 	else{
+		printf("Der gesuchte Shif: \n");
 		printShip(getShip(shipone, keyword));
 		}
 }	
@@ -275,7 +267,6 @@ Ship* deleteShip(Ship* shipone){
 
 	printf("Bitte geben sie Name der Shiff, der geloescht sein soll: \n");
 	fgets(keyword, MAXNAME, stdin); 
-//	printf("Sie wollten dieser Shiff loeschen: %s \n", keyword);
 
 	if (getShip(shipone, keyword)== NULL){
 		printf("Shiff mit der Name:  \n%sist nicht gefunden geworden, da kann er auch nicht geloescht sein! \n", keyword);
@@ -389,30 +380,27 @@ void showDistance (Ship* shipone){
 		while(firstPosition == NULL){
 			printf("Bitte geben sie den gesuchte Shiff 1: \n");
 			fgets(keyword, MAXNAME, stdin); 
-		//	printf("Sie wollten nach dieser Shiff: %s \n", keyword);
 
 			if (getShip(shipone, keyword)== NULL){
 				printf("Shiff mit der Name:  \n %sist nicht gefunden geworden! \n", keyword);
 				printf("Versuchen sie es bitte erneut.\n\n");
 			}else{
 				firstPosition = getPosition(getShip(shipone, keyword));
-				//printPosition(firstPosition);
 				}
 			}
 		
 		while(secondPosition == NULL){
 			printf("Bitte geben sie den gesuchte Shiff 2: \n");
 			fgets(keyword2, MAXNAME, stdin); 
-		//	printf("Sie wollten nach dieser Shiff: %s \n", keyword2);
 
 			if (getShip(shipone, keyword2)== NULL){
 				printf("Shiff mit der Name:  \n %sist nicht gefunden geworden! \n", keyword2);
 				printf("Versuchen sie es bitte erneut.\n\n");
 			}else{
 				secondPosition = getPosition(getShip(shipone, keyword2));
-				//printPosition(secondPosition);
 				}
 			}
+		printf("=======================================================\n");
 		printf("\nDer Distanz zwischen zwie gegebene Shiffe ist: %.3f \n", calculateDistance(firstPosition, secondPosition));
 
 		}
@@ -429,42 +417,40 @@ void showDistance (Ship* shipone){
  * =====================================================================================
  */
 Ship* sortShips(Ship* shipone){
-//	Ship* current = shipone;
-//	Ship* nextone = NULL;
 	Ship* top;
 	Ship *q;
 	Ship *p;
 	int changed = 1;
 
-// 	Ship* temp;
 	if ( (top = (Ship*)malloc(sizeof(Ship))) == NULL){
 		printf("Speicher Zugriff Fehler!\n");
 		exit(1);
 		}
 
-	top->Next = shipone;
+	top->Next = shipone; //"Next" Zeiger von der "top" Shiff zeigt auf anfang der Liste
 
-	if(shipone != NULL && shipone->Next != NULL){
-		//printf("Nichts zu sortieren.\n");
+	if(shipone != NULL && shipone->Next != NULL){ //etwas machen, wenn es zwei Elemente zur Vergleichen gibt
 		
 		while(changed){
-			changed = 0;
-			q = top;
+			changed = 0; 
+			q = top; 
 			p = top->Next;
-			while ( p->Next != NULL){
-				if(strcmp(p->Name, p->Next->Name) > 0){
-					q->Next = swapShips(p, p->Next);
-					changed = 1;
+			while ( p->Next != NULL){ //bis zu der letzter Element
+				if(strcmp(p->Name, p->Next->Name) > 0){ //wenn nachster Shif "kleiner" als der voriger Shiff
+					q->Next = swapShips(p, p->Next); //die zwie gegebene Shiffe mit einander tauschen
+					changed = 1; //etwas war geandert, muss nochmal gemacht sein werden
 				}
-			q = p;
-			if (p->Next != NULL)
-				p = p->Next;
+				q = p; //
+				if (p->Next != NULL) //ein Shritt weiter gehen
+					p = p->Next;
 			}
 		}
 	}
-	p = top->Next;
-	free(top);
-	return p;
+	p = top->Next; //Anfagn der Liste sichern
+	free(top); //struct der wird mit *top angezeigt frei gegeben
+	printf("Erfolg!\n");
+	sleep(1);
+	return p; //anfang der Liste
 }
 		/* -----  end of function sortShips  ----- */
 
@@ -478,12 +464,7 @@ Ship* sortShips(Ship* shipone){
  * =====================================================================================
  */
 Ship* swapShips(Ship* ship1, Ship* ship2){
-/* 	Ship* temp;
-	if ( (temp = (Ship*)malloc(sizeof(Ship))) == NULL){
-		printf("Speicher Zugriff Fehler!\n");
-		exit(1);
-		}
-*/	ship1->Next = ship2->Next;
+	ship1->Next = ship2->Next;
 	ship2->Next = ship1;
 	return ship2;
 }		/* -----  end of function swapShips  ----- */

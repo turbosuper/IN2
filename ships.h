@@ -19,7 +19,6 @@ void printPosition(Coordinates*);
 Ship* createShip();
 Coordinates* createPosition();
 void showAll(Ship*);
-//Ship* findShip(Ship*);
 void findShip(Ship*);
 Ship* getShip (Ship* shipone, char keyword[MAXNAME]);
 Ship* deleteShip(Ship*);
